@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 import java.util.Random;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 
 public class Play extends javax.swing.JFrame {
 
@@ -16,7 +17,7 @@ public class Play extends javax.swing.JFrame {
         setBounds(300,300,600,434);
         date();
         time();
-        hiddenWord(randomWord);
+        chooseWord(randomWord);
         createAlphabet();
     }
     
@@ -40,18 +41,18 @@ public class Play extends javax.swing.JFrame {
     } 
 
     
-    public void hiddenWord(String randomWord) {
+    public void chooseWord(String randomWord) {
         Random rand = new Random();
         String[] wordBank = {"abstract", "cemetery", "nurse", "pharmacy", "climbing"};
         randomWord = wordBank[rand.nextInt(wordBank.length)];
         
         String hiddenWord = "";
         for(int i=0; i<randomWord.length(); i++) {
-            hiddenWord+="-  ";
+            hiddenWord+="_  ";
         } 
         hiddenWordLabel.setText(hiddenWord);
     }
-    
+     
     
     public ArrayList<javax.swing.JButton> createAlphabet()
     {
@@ -82,19 +83,42 @@ public class Play extends javax.swing.JFrame {
             }
             startButton++;
             alphabetB.add(alphaButtons);
+            alphaButtons.setVisible(true);
 
             alphaButtons.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AllButtonActionPerformed(evt);
             }
                 private void AllButtonActionPerformed(ActionEvent evt) {
-
+                    for (int i = 0; i < randomWord.length(); i++) {
+                        if (alphaButtons.getText().toLowerCase().charAt(0) == randomWord.charAt(i)) {
+                            //hiddenWordLabel.get(i).setText(Character.toString(randomWord.charAt(i)));
+                        }
+                    }
                 }
             });
         }
         return alphabetB;
     }
   
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -108,7 +132,6 @@ public class Play extends javax.swing.JFrame {
         userScore = new javax.swing.JLabel();
         hiddenWordLabel = new javax.swing.JLabel();
         backGround = new javax.swing.JLabel();
-        blackBackgGround = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 400));
@@ -170,10 +193,6 @@ public class Play extends javax.swing.JFrame {
         getContentPane().add(backGround);
         backGround.setBounds(0, 0, 600, 400);
 
-        blackBackgGround.setBackground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(blackBackgGround);
-        blackBackgGround.setBounds(0, 0, 600, 400);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
@@ -181,7 +200,7 @@ public class Play extends javax.swing.JFrame {
     
     private void skipButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skipButtonActionPerformed
         // TODO add your handling code here:
-        new Play().setVisible(true);
+        new End().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_skipButtonActionPerformed
 
@@ -223,7 +242,6 @@ public class Play extends javax.swing.JFrame {
     private String randomWord = "";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backGround;
-    private javax.swing.JPanel blackBackgGround;
     private javax.swing.JLabel date;
     private javax.swing.JLabel hangMan;
     private javax.swing.JLabel hiddenWordLabel;
@@ -231,6 +249,6 @@ public class Play extends javax.swing.JFrame {
     private javax.swing.JButton skipButton;
     private javax.swing.JLabel time;
     private javax.swing.JLabel title;
-    private javax.swing.JLabel userScore;
+    public javax.swing.JLabel userScore;
     // End of variables declaration//GEN-END:variables
 }
